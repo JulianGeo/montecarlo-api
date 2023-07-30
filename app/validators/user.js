@@ -2,7 +2,7 @@ import { check } from "express-validator";
 import { validateResult } from "../helpers/validateHelper.js";
 
 export const validateSignUp = [
-  check("firstName").exists("First name is required"),
+  check("firstName").exists(),
   check("lastName").exists(),
   check("email").exists().isEmail(),
   check("password").exists(),
