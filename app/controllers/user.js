@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 import UserModel from "../models/user.js";
 import { httpError } from "../helpers/errorHandler.js";
 
-const secret = "test";
+const secret = process.env.JWT_SECRET;
 
 /**
  * Function to log or authenticate a user based on email and password.

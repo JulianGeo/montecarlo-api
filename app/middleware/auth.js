@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 
-const secret = "test";
+const secret = process.env.JWT_SECRET;
 
 /**
  * Function to handle the JWT
