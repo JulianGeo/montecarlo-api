@@ -1,6 +1,6 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
-const dbConnect = () => {
+export const dbConnect = () => {
   const DB_URI = process.env.DB_URI;
   mongoose.connect(
     DB_URI,
@@ -17,5 +17,3 @@ const dbConnect = () => {
     }
   );
 };
-
-module.exports = { dbConnect };
