@@ -1,8 +1,5 @@
 import mongoose from "mongoose";
 
-/**
- * Objeto del modelo de usuarios
- */
 const potentialSimulationSchema = mongoose.Schema(
   {
     phie_average: { type: Number, required: true },
@@ -11,6 +8,7 @@ const potentialSimulationSchema = mongoose.Schema(
     h_med: { type: Number, required: true },
     h_max: { type: Number, required: true },
     area: { type: Number, required: true },
+    iterations: { type: Number, required: true },
   },
   {
     timestamps: true,

@@ -1,8 +1,5 @@
 import mongoose from "mongoose";
 
-/**
- * Objeto del modelo de usuarios
- */
 const simulationSchema = mongoose.Schema(
   {
     type: { type: String, required: true },

@@ -1,8 +1,5 @@
 import mongoose from "mongoose";
 
-/**
- * Objeto del modelo de usuarios
- */
 const userSchema = mongoose.Schema(
   {
     name: { type: String, required: true },
