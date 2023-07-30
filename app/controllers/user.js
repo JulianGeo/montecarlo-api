@@ -3,8 +3,6 @@ import jwt from "jsonwebtoken";
 import UserModel from "../models/user.js";
 import { httpError } from "../helpers/errorHandler.js";
 
-const secret = process.env.JWT_SECRET;
-
 /**
  * Function to log or authenticate a user based on email and password.
  * Compares in the Mongo database if there is a user with the credentials
@@ -15,6 +13,7 @@ const secret = process.env.JWT_SECRET;
  * @param {Response} res response
  */
 export const signin = async (req, res) => {
+  const secret = process.env.JWT_SECRET;
   const { email, password } = req.body;
 
   try {
@@ -34,7 +33,7 @@ export const signin = async (req, res) => {
 
     res.status(200).json({ result: oldUser, token });
   } catch (err) {
-    httpError(res, err, "Something went wrong");
+    httpError(res, err, "Something went wrong", 500);
   }
 };
 
@@ -47,6 +46,7 @@ export const signin = async (req, res) => {
  * @param {Response} res response
  */
 export const signup = async (req, res) => {
+  const secret = process.env.JWT_SECRET;
   const { email, password, firstName, lastName } = req.body;
 
   try {
@@ -68,9 +68,8 @@ export const signup = async (req, res) => {
     });
 
     res.status(201).json({ result, token });
-  } catch (error) {
-    res.status(500).json({ message: "Something went wrong" });
-
-    console.log(error);
+  } catch (err) {
+    httpError(res, err, "Something went wrong", 500);
+    console.log(err);
   }
 };

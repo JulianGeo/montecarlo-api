@@ -1,17 +1,25 @@
 import jwt from "jsonwebtoken";
-
-const secret = process.env.JWT_SECRET;
+import { httpError } from "../helpers/errorHandler.js";
 
 /**
- * Function to handle the JWT
+ * Function to handle the JWT validation
  *
  * @param {Request} req request
  * @param {Response} res response
  * @param {Function} next Error handling function
  */
 const auth = async (req, res, next) => {
+  const secret = process.env.JWT_SECRET;
   try {
-    const token = req.headers.authorization.split(" ")[1];
+    const authHeader = req.headers.authorization;
+
+    if (!authHeader || !authHeader.startsWith("Bearer ")) {
+      return res
+        .status(401)
+        .json({ error: "Unauthorized. No token provided." });
+    }
+
+    const token = authHeader.split(" ")[1]; // Fix the typo here
     const isCustomAuth = token.length < 500;
     let decodedData;
 
@@ -25,6 +33,7 @@ const auth = async (req, res, next) => {
 
     next();
   } catch (error) {
+    httpError(res, error, "Invalid token", 401);
     console.log(error);
   }
 };
